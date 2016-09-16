@@ -1,7 +1,6 @@
 <?require_once("../scripts/head.php");?>
 
 <html lang="en">
-	<?=navigation_menu()?>
 	<div class="container">	
 		<table class="table">
 			<thead>

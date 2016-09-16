@@ -1,4 +1,4 @@
-<?function navigation_menu(){?>
+
 <nav class="navbar navbar-default">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Components<strong><?=$user->username?></strong> <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Components<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="../timeclock">Time-Clock</a></li>
             <li role="separator" class="divider"></li>
@@ -29,7 +29,7 @@
 	  
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Signed in as <strong>Isaac Daniel Reyna</strong> <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Signed in as <strong><?=$user->username?></strong> <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Profile</a></li>
             <li role="separator" class="divider"></li>
@@ -41,4 +41,3 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<?}?>

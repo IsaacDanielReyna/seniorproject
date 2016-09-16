@@ -3,10 +3,11 @@
 
 	function update_user($data)
 	{
-		$user = new stdClass();
-		$user->isset = true;
-		$user->username = $data['username'];
-		$user->id = $data['id'];
+		$u = new stdClass();
+		$u->isset = true;
+		$u->username = $data['username'];
+		$u->email = $data['email'];
+		$u->id = $data['id'];
 		/**
 		$user->first_name = $data['first'];
 		$user->middle_name = $middle['middle'];
@@ -16,7 +17,7 @@
 		$user->group = 0;
 		/**/
 
-		return $user;
+		return $u;
 	}
 	
 	function isLoggedIn()
@@ -26,11 +27,8 @@
 		return false;
 	}
 	
-	if(!isLoggedIn())
-	{	
+	if(!isLoggedIn()) // If you're not logged in, log out.
 		header('Location: ../login');
-		//die();
-	}
 	else
 	{
 		$uid = $_SESSION['session_user_id'];
@@ -49,10 +47,7 @@
 		$row=$stmt->fetch();
 		
 		if (!$row)
-		{
-			//invalid user logout
 			header('Location: ../logout');
-		}
 		else
 			$user = update_user($row); // TODO: MOVE/FINISH THIS
 	}

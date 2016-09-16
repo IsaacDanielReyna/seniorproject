@@ -1,0 +1,2 @@
+[15-Sep-2016 23:49:58 America/Chicago] PHP Fatal error:  Call to a member function prepare() on a non-object in /home4/idreyna/public_html/system/scripts/auth.php on line 37
+[15-Sep-2016 23:49:59 America/Chicago] PHP Fatal error:  Call to a member function prepare() on a non-object in /home4/idreyna/public_html/system/scripts/auth.php on line 37

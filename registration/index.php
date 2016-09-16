@@ -45,6 +45,9 @@
 					  
 					  <button id="submit" type="submit" class="btn btn-success btn-block">Sign Up</button>
 					</form>
+					<div class="row">
+						<div class="col-md-6"><p><a href="../login">Cancel</a></p></div>
+					</div>
 				  </div>
 				</div>
 			</div>
