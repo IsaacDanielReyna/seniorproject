@@ -83,7 +83,7 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				<h4 class="modal-title" id="myModalLabel">July 11, 2016</h4>
 			  </div>
 			  <div class="modal-body">
 			  
@@ -99,9 +99,24 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>CLOCK-IN</td>
+								<td>IN</td>
 								<td>12:30pm</td>
-								<td>24.167.81.120</td>
+								<td><a href"#">24.167.81.120</a></td>
+							</tr>
+							<tr>
+								<td>OUT</td>
+								<td>1:30pm</td>
+								<td><a href"#">24.167.81.120</a></td>
+							</tr>
+							<tr>
+								<td>IN</td>
+								<td>2:15pm</td>
+								<td><a href"#">24.167.81.120</a></td>
+							</tr>
+							<tr>
+								<td>OUT</td>
+								<td>5:35pm</td>
+								<td><a href"#">24.167.81.120</a></td>
 							</tr>
 						</tbody>
 					  </table>
