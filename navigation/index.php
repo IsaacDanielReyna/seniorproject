@@ -20,7 +20,7 @@
           <ul class="dropdown-menu">
             <li><a href="../timeclock">Time-Clock</a></li>
             <li role="separator" class="divider"></li>
-			<li><a href="#">Paid Time Off</a></li>
+			<li><a href="#">Logs</a></li>
           </ul>
         </li>
         <li id="timeclock"><a href="../timeclock">Time-Clock <span class="sr-only">(current)</span></a></li>
@@ -33,7 +33,6 @@
           <ul class="dropdown-menu">
             <li><a href="../profile">Profile</a></li>
             <li role="separator" class="divider"></li>
-			<li><a href="#">Request PTO</a></li>
             <li><a href="../logout">Sign out</a></li>
           </ul>
         </li>

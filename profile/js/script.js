@@ -1,6 +1,6 @@
 $(document).ready(function(){
-	$( "#fileinput" ).change(function(){
-		val = $("#fileinput").val().replace(/C:\\fakepath\\/i, '');
+	$( "#file" ).change(function(){
+		val = $("#file").val().replace(/C:\\fakepath\\/i, '');
 		$("#filename").text(val);
 	});
 	
@@ -8,29 +8,46 @@ $(document).ready(function(){
 	$( "#form" ).submit(function( event ) {
 		$("#alert").hide();
 		event.preventDefault();
-		//test_connection();
+		send();
 	});
 	
-	function test_connection()
+	function send()
 	{
-		host = $("#host").val();
-		database = $("#database").val();
-		username = $("#username").val();
-		password = $("#password").val();
-		prefix = $("#prefix").val();
+		file = $("#file").val();
+		first_name = $("#first_name").val();
+		middle_name = $("#middle_name").val();
+		last_name = $("#last_name").val();
+		phone_number = $("#phone_number").val();
+		street_address = $("#street_address").val();
+		city = $("#city").val();
+		state = $("#state").val();
+		zip_code = $("#zip_code").val();
+		
+		data = {file: file,
+				first_name: first_name,
+				middle_name: middle_name,
+				last_name: last_name,
+				phone_number: phone_number,
+				street_address: street_address,
+				city: city,
+				state: state,
+				zip_code: zip_code
+				}
 		
 		$.ajax( {
 			type: "POST",
-			url: "./validate.php",
-			data: "host=" + host + "&database=" + database + "&username=" + username + "&password=" + password + "&prefix=" + prefix,
+			url: "./update.php",
+			data: data,
 			success: function (data){
+				/**
 				json = jQuery.parseJSON(data);
-				console.log(json);
 				if (json.result == false)
 				{
 					$("#alert-message").text(json.alert.message);
 					$("#alert").show();
 				}
+				/**/
+				console.log(data);
 			}
 		});
 	}
