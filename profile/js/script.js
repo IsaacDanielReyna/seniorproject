@@ -1,18 +1,21 @@
 $(document).ready(function(){
+	$("#menu_profile").addClass("active");
+
+  
 	$( "#file" ).change(function(){
 		val = $("#file").val().replace(/C:\\fakepath\\/i, '');
 		$("#filename").text(val);
 	});
 	
-	// Prevents Submit
-	$( "#form" ).submit(function( event ) {
-		$("#alert").hide();
-		event.preventDefault();
-		send();
-	});
+	
+	$('#save').on('click', function () {
+		$(this).button('loading')
+		send();		
+	})
 	
 	function send()
 	{
+		$("#alert").hide();
 		file = $("#file").val();
 		first_name = $("#first_name").val();
 		middle_name = $("#middle_name").val();
@@ -48,6 +51,7 @@ $(document).ready(function(){
 				}
 				/**/
 				console.log(data);
+				$('#save').button('reset');
 			}
 		});
 	}

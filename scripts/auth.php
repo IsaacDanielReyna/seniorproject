@@ -34,6 +34,11 @@
 		return false;
 	}
 	
+	function validToken($token)
+	{
+		//todo
+	}
+	
 	if(!isLoggedIn()) // If you're not logged in, log out.
 		header('Location: ../login');
 	else

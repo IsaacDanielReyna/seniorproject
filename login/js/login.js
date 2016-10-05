@@ -12,7 +12,6 @@ $(document).ready(function(){
 	
 	function login()
 	{
-		//$("#login_error").css("visibility", "hidden");
 		username = $("#username").val();
 		password = $("#password").val();
 		
@@ -20,13 +19,20 @@ $(document).ready(function(){
 			type: "POST",
 			url: "./login.php",
 			data: "username=" + username + "&password=" + password,
+			error: function (){
+				$('#submit').removeAttr('disabled');
+				$('#submit').removeAttr('btn-success').addClass('btn-danger');
+				$('#submit').html('ERROR');
+			},
 			success: function (data){
 				json = jQuery.parseJSON(data);
-				//console.log(json);
-				$("#alert-message").text(json.alert.message);
-				$('#alert').removeAttr('class').addClass(json.alert.type);
+				$("#alert-message").empty();
+				for (var i=0; i<json.alert.messages.length; i++)
+					$("#alert-message").append(json.alert.messages[i]+'<br>');
+				$('#alert').removeAttr('class').addClass('alert alert-dismissible alert-' + json.alert.type);
 				$("#alert").show();
-				if (json.isLogin == 0)
+				
+				if (json.result == false)
 					$('#submit').removeAttr('disabled');
 				else
 					window.location.replace("../");

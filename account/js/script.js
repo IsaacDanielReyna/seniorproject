@@ -1,36 +1,39 @@
 $(document).ready(function(){
-	$( "#fileinput" ).change(function(){
-		val = $("#fileinput").val().replace(/C:\\fakepath\\/i, '');
-		$("#filename").text(val);
-	});
+	$("#menu_account").addClass("active");
 	
-	// Prevents Submit
-	$( "#form" ).submit(function( event ) {
-		$("#alert").hide();
-		event.preventDefault();
-		//test_connection();
-	});
+	$('#save').on('click', function () {
+		$(this).button('loading')
+		send();		
+	})
 	
-	function test_connection()
+	function send()
 	{
-		host = $("#host").val();
-		database = $("#database").val();
-		username = $("#username").val();
-		password = $("#password").val();
-		prefix = $("#prefix").val();
+		$("#alert").hide();
+		email = $("#email").val();
+		pw1 = $("#pw1").val();
+		pw2 = $("#pw2").val();
 		
+		data = {
+				email: email,
+				pw1: pw1,
+				pw2: pw2,
+				}
+		console.log(data);
 		$.ajax( {
 			type: "POST",
-			url: "./validate.php",
-			data: "host=" + host + "&database=" + database + "&username=" + username + "&password=" + password + "&prefix=" + prefix,
+			url: "./update.php",
+			data: data,
 			success: function (data){
+				/**
 				json = jQuery.parseJSON(data);
-				console.log(json);
 				if (json.result == false)
 				{
 					$("#alert-message").text(json.alert.message);
 					$("#alert").show();
 				}
+				/**/
+				console.log(data);
+				$('#save').button('reset');
 			}
 		});
 	}

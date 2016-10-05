@@ -16,9 +16,9 @@
 			<div class="col-md-4">
 				<img src="../logo.png" class="img-responsive center-block" alt="Responsive image">
 				<h3><p class="text-center">Sign In</p></h3>
-				<div id="alert" class="alert alert-danger alert-dismissible" role="alert" style="display: none;">
+				<div id="alert" class="alert alert-default alert-dismissible" role="alert" style="display: none;">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<p id="alert-message">Incorrect username or password.</p>
+					<p id="alert-message"></p>
 				</div>
 				<div class="panel panel-default">
 				  <div class="panel-body">

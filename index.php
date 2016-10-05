@@ -9,5 +9,5 @@
 	if(!isLoggedIn())
 		header('Location: ./login');
 	else
-		header('Location: ./main');
+		header('Location: ./timeclock');
 ?>

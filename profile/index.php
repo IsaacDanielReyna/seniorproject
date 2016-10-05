@@ -3,24 +3,13 @@
 <html lang="en">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4">
-				<div class="panel panel-default">
-					<!-- Default panel contents -->
-					<div class="panel-heading"><strong>Settings</strong></div>	
-					
-					<div class="list-group">
-					  <a href="#" class="list-group-item active">Profile</a>
-					  <a href="#" class="list-group-item">Account</a>
-					</div>
-				</div>			
-			</div>
-
+			<?require_once("../settings_menu/index.php")?>
 			<div class="col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-heading"><strong>Profile</strong></div>
 					
 					<div class="panel-body">
-						<form id="form">
+						<form id="form" method="post" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-md-3">
 									<a href="#" class="thumbnail">
@@ -30,8 +19,9 @@
 								
 								<div class="col-md-3">
 									<div class="form-group">								
-										<label for="file" class="btn btn-default btn-file">
-											<span id="filename">Upload new picture</span><input id="file" type="file" style="display: none;">
+										<label for="file_data" class="btn btn-default btn-file">
+											<span id="filename">Upload new picture</span>
+											<input id="file_data" type="file" name="file_data" style="display: none;">
 										</label>
 										<p class="help-block">100 KB Max</p>
 
@@ -99,7 +89,10 @@
 									</div>
 								</div>
 							</div>
-							<button type="submit" class="btn btn-success">Save Changes</button>
+							<button type="button" id="save" data-loading-text="Saving..." class="btn btn-success" autocomplete="off">
+							  Save
+							</button>
+
 						</form>						
 					</div>
 				</div>

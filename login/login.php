@@ -23,30 +23,65 @@
 	
 	function start_session($user_id)
 	{
+		$payload = new stdClass();
+		$payload->id = $user_id;
+		$token = JWT::encode($payload, SECRET_SERVER_KEY);
+
 		session_start();
 		session_regenerate_id ();
 		$_SESSION['session_valid'] = 1;
 		$_SESSION['session_user_id'] = $user_id;
+		$_SESSION['token'] = $token;
+
+		$k = new stdClass();
+		$k->token = $token;
+		$k->session = session_id();
+		return $k;
 	}
 	
-	if ($_POST){
+	function displayname($data)
+	{
+		$displayname = $data['first_name'] . " ". $data['middle_name'] . " " . $data['last_name'];
+		
+		return $displayname;
+	}
+	
+	if ($_POST)
+	{
 		$username = $_POST['username'];
 		$password = $_POST['password'];
+		$error = false;
+		
+		
+		if (IsNullOrEmpty($username)){
+			$error = true;
+			$messages[] = "Username is empty";
+		}
+		
+		if (IsNullOrEmpty($password)){
+			$error = true;
+			$messages[] = "Password is empty";
+		}
 
-		if (IsNullOrEmpty($username) || IsNullOrEmpty($password))
+		if ($error)
 		{
-			$json = new stdClass();
-			$json->isLogin = 0;
-			$json->alert = alert("danger", "Invalid username or password");
-			echo json_encode($json);
+			$alert = new stdClass();
+			$alert->type = "danger";
+			$alert->messages = $messages;
+			
+			$data = new stdClass();
+			$data->alert = $alert;
+			$data->result = false;
+			echo json_encode($data);			
 		}
 		else
 		{
-			// TODO: CLEAN THIS MESS UP
 			require_once("../scripts/dbconnect.php");
+			
 			try
 			{	
-				$sql = "SELECT * FROM users WHERE `username` = :db_username";
+				$sql = "SELECT * FROM users WHERE `username` = :db_username
+						OR `email` = :db_username";
 				$stmt = $conn->prepare($sql);
 				$stmt->bindParam( ':db_username', $username );
 				$stmt->execute();
@@ -58,22 +93,44 @@
 			}
 			$row=$stmt->fetch();
 			
-			$hash = $row['password'];
 			
 			// verify password
+			$hash = $row['password'];
 			if (password_verify($password, $hash))
 			{
+				require_once("../scripts/jwt/JWTHelper.php");
+				define("SECRET_SERVER_KEY", "UltimatelySecured@100%");
+
+				$key = start_session($row['id']);
 				
-				$arr = array('result' => 1, 'user_id' => $row['id'], 'token' => $row['token']);
-				$json = json_encode($arr);
-				echo json_encode(Array('isLogin' => '1', 'username' => $row['username'], 'user_id' => $row['id'], 'token' => $row['token'], 'email' => $row['email'], 'alert' => alert("success", "Success: Logging in")));
-				start_session($row['id']);
+				$user = new stdClass();
+				$user->id = $row['id'];
+				$user->session = $key->session;
+				$user->token = $key->token;
+				$user->username = $row['username'];
+				$user->email = $row['email'];
+				$user->displayname = displayname($row);
+				
+				$alert = new stdClass();
+				$alert->type = "success";
+				$alert->messages[] = "Login Successful";
+				
+				$data = new stdClass();
+				$data->result = true;
+				$data->user = $user;
+				$data->alert = $alert;
+				echo json_encode($data);
 			}
 			else
-			{
-				$arr = array('result' => 0, 'user_id' => 0, 'token' => 0);
-				$json = json_encode($arr);
-				echo json_encode(Array('isLogin' => '0', 'alert' => alert("danger", "Wrong username or password")));
+			{			
+				$alert = new stdClass();
+				$alert->type = "danger";
+				$alert->messages[] = "Wrong username or password";
+				
+				$data = new stdClass();
+				$data->alert = $alert;
+				$data->result = false;
+				echo json_encode($data);	
 			}
 		}
 	}
