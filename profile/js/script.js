@@ -2,8 +2,8 @@ $(document).ready(function(){
 	$("#menu_profile").addClass("active");
 
   
-	$( "#file" ).change(function(){
-		val = $("#file").val().replace(/C:\\fakepath\\/i, '');
+	$( "#file_data" ).change(function(){
+		val = $("#file_data").val().replace(/C:\\fakepath\\/i, '');
 		$("#filename").text(val);
 	});
 	

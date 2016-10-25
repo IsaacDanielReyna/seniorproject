@@ -32,7 +32,7 @@
 ?>
 <?php
 require_once('JWTHelper.php');
-define("SECRET_SERVER_KEY", "UltimatelySecured@100%");
+//define("SECRET_SERVER_KEY", "UltimatelySecured@100%");
 
 if ($_GET['id'] != null && $_GET['id'] != '')
 {
@@ -50,6 +50,7 @@ else if ($_GET['token'] != null && $_GET['token'] != '')
 	try{
 		$token = JWT::decode($_GET['token'], SECRET_SERVER_KEY);
 		print_r($token);
+		echo $token->id;
 	}
 	catch( Exception  $e )
 	{

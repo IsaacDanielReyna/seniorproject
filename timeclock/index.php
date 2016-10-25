@@ -4,7 +4,14 @@
 <script src="./js/script.js?v=<?=time()?>"></script>
 <html lang="en">
 	<div class="container">	
-		<?=punch_menu()?>
-		<?=worksheet()?>
+		<div class="row">
+			<div class="col-md-12">
+				<?=punch_menu()?>
+			</div>
+		</div>
+		
+		<div class="row">
+			<?=worksheet()?>
+		</div>
 	</div>
 </html>

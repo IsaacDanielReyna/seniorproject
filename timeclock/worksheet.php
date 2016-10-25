@@ -1,5 +1,4 @@
 <?function worksheet(){?>
-	<div class="row">
 		<div class="col-md-12">
 			<h3 class="page-header">Work Sheet</h3>
 			<p><strong>Week of July 11, 2016 to July 28, 2016</strong></p>
@@ -130,8 +129,4 @@
 			</div>
 		  </div>
 		</div>
-
-
-
-	</div>
 <?}?>

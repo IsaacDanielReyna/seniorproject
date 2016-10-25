@@ -70,11 +70,10 @@
 					$token = "NA";
 					try
 					{	
-						$sql = "INSERT INTO users (username,password,token,email) VALUES (:db_username, :db_password, :db_token, :db_email);";
+						$sql = "INSERT INTO users (username, password, email) VALUES (:db_username, :db_password, :db_email);";
 						$stmt = $conn->prepare($sql);
 						$stmt->bindParam( ':db_username', $username );
 						$stmt->bindParam( ':db_password', $hash );
-						$stmt->bindParam( ':db_token', $token );
 						$stmt->bindParam( ':db_email', $email );
 						$stmt->execute();
 						$uid = $conn->lastInsertId();

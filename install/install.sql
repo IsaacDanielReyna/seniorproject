@@ -3,29 +3,38 @@ USE senior_project
 
 CREATE TABLE users (
 	id 			INTEGER 	NOT NULL AUTO_INCREMENT,
-	gid 			int(11) DEFAULT 0,
 	username 		VARCHAR(20) NOT NULL,
 	password 		VARCHAR(255) NOT NULL,
-	token 			VARCHAR(32) NOT NULL,
+	photo 			VARCHAR(255),
 	email 			VARCHAR(255) NOT NULL,
 	first_name 		VARCHAR(20),
 	middle_name 	VARCHAR(20),
 	last_name 		VARCHAR(20),
 	phone_number 	VARCHAR(20),
-	street_address 	VARCHAR(20),
+	address 	VARCHAR(20),
 	city 			VARCHAR(20),
 	state 			VARCHAR(20),
 	zip_code 		VARCHAR(20),
+	default_company INTEGER,
 	PRIMARY KEY(id),
 	UNIQUE(username),
 	UNIQUE(email)
 );
 
 CREATE TABLE companies (
-	id			INTEGER 	NOT NULL AUTO_INCREMENT,
-	name		VARCHAR(20) NOT NULL,
-	description	VARCHAR(20) NOT NULL,
-	employer	INTEGER		NOT NULL,
+	id 			INTEGER 		NOT NULL AUTO_INCREMENT,
+	name 		VARCHAR(100) 	NOT NULL,
+	employer 	INTEGER 		NOT NULL,
+	timestamp 	TIMESTAMP 		DEFAULT NOW() 	NOT NULL,
+	status 		INTEGER 		DEFAULT 1,
+	description VARCHAR(255),
+	address 	VARCHAR(255),
+	city 		VARCHAR(255),
+	state 		VARCHAR(255),
+	zip 		VARCHAR(11),
+	country 	VARCHAR(255),
+	timezone 	INTEGER 		DEFAULT -6,
+	
 	PRIMARY KEY(id),
 	FOREIGN KEY (employer) REFERENCES users(id),
 	UNIQUE(name, employer)
@@ -49,15 +58,16 @@ CREATE TABLE statuses(
 );
 
 CREATE TABLE employees (
-	company		INTEGER			NOT NULL,
-	user_id		INTEGER			NOT NULL,
-	group_id	INTEGER			NOT NULL,
-	pay_rate	DECIMAL(19,4)	NOT NULL,
-	status_id	INTEGER			NOT NULL,
-	FOREIGN KEY (company)	REFERENCES companies(id),
-	FOREIGN KEY (user_id)	REFERENCES users(id),
-	FOREIGN KEY (group_id)	REFERENCES groups(id),
-	FOREIGN KEY (status_id)	REFERENCES statuses(id)
+	company 	INTEGER 		NOT NULL,
+	user_id 	INTEGER 		NOT NULL,
+	group_id 	INTEGER 		NOT NULL,
+	pay_rate 	DECIMAL(19,4) 	NOT NULL,
+	status_id 	INTEGER 		NOT NULL,
+	FOREIGN KEY (company) 		REFERENCES companies(id),
+	FOREIGN KEY (user_id) 		REFERENCES users(id),
+	FOREIGN KEY (group_id) 		REFERENCES groups(id),
+	FOREIGN KEY (status_id) 	REFERENCES statuses(id),
+	UNIQUE (company, user_id)
 );
 
 CREATE TABLE punch_types (

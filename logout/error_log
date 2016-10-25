@@ -1,2 +1,0 @@
-[03-Oct-2016 23:59:11 America/Chicago] PHP Parse error:  syntax error, unexpected 'session_destroy' (T_STRING) in /home4/idreyna/public_html/system/logout/index.php on line 6
-[03-Oct-2016 23:59:25 America/Chicago] PHP Parse error:  syntax error, unexpected 'session_destroy' (T_STRING) in /home4/idreyna/public_html/system/logout/index.php on line 6

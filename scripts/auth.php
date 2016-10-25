@@ -13,10 +13,15 @@
 		$u->middle_name = $data['middle_name'];
 		$u->last_name = $data['last_name'];
 		$u->phone_number = $data['phone_number'];
-		$u->street_address = $data['street_address'];
+		$u->address = $data['address'];
 		$u->city = $data['city'];
 		$u->state = $data['state'];
 		$u->zip_code = $data['zip_code'];
+		if ($data['photo'] == null)
+				$u->photo = 'default.jpg';
+		else
+			$u->photo = $data['photo'];
+		$u->default_company = $data['default_company'];
 		/**
 
 		$u->name = $first . ' ' . $middle[0] . ' '. $last;
@@ -34,11 +39,6 @@
 		return false;
 	}
 	
-	function validToken($token)
-	{
-		//todo
-	}
-	
 	if(!isLoggedIn()) // If you're not logged in, log out.
 		header('Location: ../login');
 	else
@@ -50,13 +50,14 @@
 			$stmt = $conn->prepare($sql);
 			$stmt->bindParam( ':db_uid', $uid );
 			$stmt->execute();
+			$row=$stmt->fetch();
 		}
 		catch( PDOException $e )
 		{
 			print "ERROR: ".$e->getMessage()."<br/>";
 			die();
 		}
-		$row=$stmt->fetch();
+
 		
 		if (!$row)
 			header('Location: ../logout');

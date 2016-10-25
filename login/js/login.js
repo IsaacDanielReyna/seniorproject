@@ -31,11 +31,12 @@ $(document).ready(function(){
 					$("#alert-message").append(json.alert.messages[i]+'<br>');
 				$('#alert').removeAttr('class').addClass('alert alert-dismissible alert-' + json.alert.type);
 				$("#alert").show();
-				
+				/**/
 				if (json.result == false)
 					$('#submit').removeAttr('disabled');
 				else
 					window.location.replace("../");
+				/**/
 			}
 		});
 	}

@@ -1,39 +1,45 @@
 <?require_once("../scripts/head.php");?>
+<?require_once("section-company-view.php");?>
+<?require_once("section-company-edit.php");?>
+<?require_once("section-company-new.php");?>
+<?require_once("section-companies.php");?>
+<?require_once("section-employees.php");?>
+<?require_once("get_company.php");?>
 <script src="./js/script.js?v=<?=time()?>"></script>
 <html lang="en">
 	<div class="container">
 		<div class="row">
 			<?require_once("../settings_menu/index.php")?>
+
 			<div class="col-md-8">
-				<div class="panel panel-default">
-					<div class="panel-heading"><strong>Companies</strong></div>
-					<div class="panel-body">
-							<div class="row">
-								<div class="col-md-12">
-									<div class="alert alert-warning">
-										<h4>No records</h4>
-										<p>No data found matching your query.</p>
-										<button class="btn btn-success">New Company</button>
-									</div>
-									<table class="table">
-										<thead>
-											<tr>
-												<th>Name</th>
-											</tr>
-										</thead>
-										
-										<tbody>
-											<tr><td>Company 1</td></tr>
-											<tr><td>Company 2</td></tr>
-											<tr><td>Company 3</td></tr>
-											<tr><td>Company 4</td></tr>
-											<tr><td>Company 5</td></tr>
-										</tbody>
-									</table>
+				<?
+					if ($_GET['company'] != "" || $_GET['company'] != null){
+					$result = json_decode(get_company($conn, $user, $_GET['company']));
+						if ($result->result)
+						{
+							if ($_GET['task'] == 'edit')
+							{
+								editcompany($result->company);
+							}
+							else
+							{
+								company($result->company);
+								employees();
+							}
+
+						}else{?>
+							<div class="panel panel-default" id="panel-company_info" style="">
+								<div class="panel-heading"><strong id="company-name">Company</strong></div>
+								<div class="panel-body">
+									<?=$result->alert->messages[0]?>
 								</div>
 							</div>
-					</div>
-				</div>
+						<?}
+					}else{
+						companies($user);
+						section_new_company();
+					}
+				?>
 			</div>
 		</div>
 	</div>
